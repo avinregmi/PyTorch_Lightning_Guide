@@ -5,17 +5,17 @@
  
     def forward(self, x):
     
-    def training_step(self, batch, batch_nb): (REQUIRED)
+    def training_step(self, batch, batch_idx): (REQUIRED)
     
     def configure_optimizers(self): (REQUIRED)
 
     def train_dataloader(self): (REQUIRED)
     
-    def validation_step(self, batch, batch_nb): (OPTIONAL)
+    def validation_step(self, batch, batch_idx): (OPTIONAL)
 
     def validation_epoch_end(self, outputs): (OPTIONAL)
 
-    def test_step(self, batch, batch_nb): (OPTIONAL)
+    def test_step(self, batch, batch_idx): (OPTIONAL)
     
     def test_epoch_end(self, outputs): (OPTIONAL)
 
