@@ -1,6 +1,7 @@
 # PyTorch_Lightning_Guide
 
 ### *Trainer*
+For more info visit: https://pytorch-lightning.readthedocs.io/en/latest/trainer.html#trainer-class
 ``` python
 from pytorch_lightning import Trainer
 model = LitMNIST()
