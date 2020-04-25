@@ -3,9 +3,11 @@
 ### PyTorch Lightning Function
 **def __init__(self):**
 
-def forward(self, x):
+**def forward(self, x):**
 
-def training_step(self, batch, batch_idx): (REQUIRED)
+**def training_step(self, batch, batch_idx): (REQUIRED)**
+
+Here you compute and return the training loss and some additional metrics for e.g. the progress bar or logger.
 
 def configure_optimizers(self): (REQUIRED)
 
