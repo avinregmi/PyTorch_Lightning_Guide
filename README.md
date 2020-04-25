@@ -7,7 +7,40 @@
 
 * **def training_step(self, batch, batch_idx): (REQUIRED)**
     <br>Here you compute and return the training loss and some additional metrics for e.g. the progress bar or logger.
+    
+    **Parameters:**
+    <br>
+        **batch:** The Output of your DataLoader. A tensor, tuple or list.
+        <br>
+        **batch_idx(int):** Integer displaying index of this batch
+        <br>
+        **optimizer_idx(int):** When using multiple optimizer, this argument will be used
+        <br>
+        **hiddens(Tensor):** Passed in if truncated_bptt_steps > 0
 
+    **Parameters:**
+    <br>
+    Dict with loss key and optional log or progress bar keys. When implementing training_step(), return whatever you need in that step.
+    <br>
+    **loss:** Tensor scalar (REQUIRED)
+    <br>
+    **progress_bar:** Dict for progress bar display. Must only have tensors
+    <br>
+    **log:** Dict of metrics to add to logger
+    
+    ``` python
+    output = {
+        'loss': loss, # required
+        'progress_bar': {'training_loss': loss}, # optional (MUST ALL BE TENSORS)
+        'log': logger_logs
+    }
+
+    # return a dict
+    return output
+    
+    ```
+      
+      
 def configure_optimizers(self): (REQUIRED)
 
 def train_dataloader(self): (REQUIRED)
