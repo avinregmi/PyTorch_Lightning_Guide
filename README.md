@@ -1,29 +1,29 @@
 # PyTorch_Lightning_Guide
 
 ### PyTorch Lightning Function
-    def __init__(self):
- 
-    def forward(self, x):
-    
-    def training_step(self, batch, batch_idx): (REQUIRED)
-    
-    def configure_optimizers(self): (REQUIRED)
+**def __init__(self):**
 
-    def train_dataloader(self): (REQUIRED)
-    
-    def validation_step(self, batch, batch_idx): (OPTIONAL)
+def forward(self, x):
 
-    def validation_epoch_end(self, outputs): (OPTIONAL)
+def training_step(self, batch, batch_idx): (REQUIRED)
 
-    def test_step(self, batch, batch_idx): (OPTIONAL)
-    
-    def test_epoch_end(self, outputs): (OPTIONAL)
+def configure_optimizers(self): (REQUIRED)
 
-    def val_dataloader(self): (OPTIONAL)
+def train_dataloader(self): (REQUIRED)
 
-    def test_dataloader(self): (OPTIONAL)
+def validation_step(self, batch, batch_idx): (OPTIONAL)
 
-    def prepare_data(self): (OPTIONAL)
+def validation_epoch_end(self, outputs): (OPTIONAL)
+
+def test_step(self, batch, batch_idx): (OPTIONAL)
+
+def test_epoch_end(self, outputs): (OPTIONAL)
+
+def val_dataloader(self): (OPTIONAL)
+
+def test_dataloader(self): (OPTIONAL)
+
+def prepare_data(self): (OPTIONAL)
 
 
 ### *Trainer*
