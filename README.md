@@ -217,7 +217,7 @@ trainer.fit(model)
 
 Args:
 
-  **max_epochs:** Stop training once this number of epochs is reached.
+  **max_epochs:** Stop training once this number of epochs is reached. **By Default max_epochs: 1000**
 
   **min_epochs:** Force training for at least these many epochs
  
