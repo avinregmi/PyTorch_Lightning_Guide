@@ -297,3 +297,60 @@ from pytorch_lightning.callbacks import EarlyStopping
 early_stopping = EarlyStopping('val_loss')
 trainer = Trainer(early_stop_callback=early_stopping)
 ```
+
+### [Model Checkpointing](https://pytorch-lightning.readthedocs.io/en/latest/callbacks.html#model-checkpointing)
+Automatically save model checkpoints during training.
+
+``` python 
+pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint(filepath=None, monitor='val_loss', verbose=False, save_top_k=1, save_weights_only=False, mode='auto', period=1, prefix='')
+```
+> Parameters: 
+> - filepath (Optional[str]): Path to save the model file. Can contain named formatting options to be auto-filled.
+> ``` python
+>	#saves a file like: my/path/epoch=2-val_loss=0.2_other_metric=0.3.ckpt
+>	checkpoint_callback = ModelCheckpoint(
+>     filepath='my/path/{epoch}-{val_loss:.2f}-{other_metric:.2f}'
+>```
+> - **monitor (str)**: quantity to monitor.
+> - **verbose (bool)**: verbosity mode. Default: False.
+> - **save_top_k (int)**: if save_top_k == k, the best k models according to the quantity monitored will be saved. if save_top_k == 0, no models are saved. if save_top_k == -1, all models are saved. 
+> - **mode (str)**: one of {auto, min, max}. If save_top_k != 0, the decision to overwrite the current save file is made based on either the maximization or the minimization of the monitored quantity. For val_acc, this should be max, for val_loss this should be min, etc. In auto mode, the direction is automatically inferred from the name of the monitored quantity.
+> - **save_weights_only (bool)**: if True, then only the model’s weights will be saved (model.save_weights(filepath)), else the full model is saved (model.save(filepath)).
+> - **period (int)**: Interval (number of epochs) between checkpoints.
+
+``` python
+from pytorch_lightning import Trainer
+from pytorch_lightning.callbacks import ModelCheckpoint
+
+# saves checkpoints to 'my/path/' whenever 'val_loss' has a new min
+checkpoint_callback = ModelCheckpoint(filepath='my/path/')
+trainer = Trainer(checkpoint_callback=checkpoint_callback)
+
+# save epoch and val_loss in name
+# saves a file like: my/path/sample-mnist_epoch=02_val_loss=0.32.ckpt
+checkpoint_callback = ModelCheckpoint(
+     filepath='my/path/sample-mnist_{epoch:02d}-{val_loss:.2f}')
+from pytorch_lightning.callbacks import ModelCheckpoint
+
+# DEFAULTS used by the Trainer
+checkpoint_callback = ModelCheckpoint(
+    filepath=os.getcwd(),
+    save_top_k=1,
+    verbose=True,
+    monitor='val_loss',
+    mode='min',
+    prefix=''
+)
+
+trainer = Trainer(checkpoint_callback=checkpoint_callback)
+```
+### [Restoring Training State](https://pytorch-lightning.readthedocs.io/en/latest/weights_loading.html)
+If you don’t just want to load weights, but instead restore the full training, do the following:
+
+``` python
+model = LitModel()
+trainer = Trainer(resume_from_checkpoint='some/path/to/my_checkpoint.ckpt')
+
+# automatically restores model, epoch, step, LR schedulers, apex, etc...
+trainer.fit(model)
+```
