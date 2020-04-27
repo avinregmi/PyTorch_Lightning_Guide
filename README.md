@@ -278,4 +278,22 @@ Args:
   **amp_level:** The optimization level to use (O1, O2, etc...).
   **num_sanity_val_steps:** Sanity check runs n batches of val before starting the training routine.
 	
+# *Callbacks*
 
+### [Early Stopping](https://pytorch-lightning.readthedocs.io/en/latest/callbacks.html?highlight=early%20stop#early-stopping)
+Stop training when a monitored quantity has stopped improving.
+
+> Parameters: 
+> - monitor (str): quantity to be monitored. **Default: 'val_loss'.**
+> - min_delta (float) – minimum change in the monitored quantity to qualify as an improvement, i.e. an absolute change of less than min_delta, will count as no improvement. **Default: 0.**
+> - patience (int) – number of epochs with no improvement after which training will be stopped. **Default: 0.**
+> - verbose (bool) – verbosity mode. **Default: False.**
+> - mode (str) – one of {auto, min, max}. In min mode, training will stop when the quantity monitored has stopped decreasing; in max mode it will stop when the quantity monitored has stopped increasing; in auto mode, the direction is automatically inferred from the name of the monitored quantity. **Default: 'auto'.**
+> - strict (bool) – whether to crash the training if monitor is not found in the metrics. **Default: True.**
+
+```python
+from pytorch_lightning import Trainer
+from pytorch_lightning.callbacks import EarlyStopping
+early_stopping = EarlyStopping('val_loss')
+trainer = Trainer(early_stop_callback=early_stopping)
+```
